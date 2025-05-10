@@ -8,9 +8,20 @@ export async function getUserFromToken() {
     if (!token) return null
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { rol: string }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+            id: string
+            rol: string
+            nombre: string
+            avatar?: string
+        }
         return decoded
     } catch {
         return null
     }
 }
+
+
+
+
+
+
