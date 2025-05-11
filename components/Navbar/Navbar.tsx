@@ -11,6 +11,8 @@ type User = {
 }
 
 export function Navbar({ user }: { user: User }) {
+    console.log("user: ", user);
+
     return (
         <nav className="flex items-center px-2 gap-x-4 md:px-6 
         justify-between w-full bg-background border-b h-20">
