@@ -31,7 +31,7 @@ export function Navbar({ user }: { user: User }) {
                 <Search strokeWidth={1} className="absolute top-2 right-2" />
             </div>
             <div className="flex gap-x-2 items-center">
-                <ToggleTheme />
+
                 <div className="flex items-center gap-2">
                     {user.avatar ? (
                         <img
@@ -45,6 +45,7 @@ export function Navbar({ user }: { user: User }) {
                     <span className="text-sm font-medium text-muted-foreground">{user.nombre}</span>
                 </div>
                 <LogoutButton />
+                <ToggleTheme />
             </div>
         </nav>
     )

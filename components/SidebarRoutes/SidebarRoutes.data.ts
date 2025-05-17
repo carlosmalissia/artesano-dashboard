@@ -18,12 +18,17 @@ export const dataGeneralSidebar = [
     {
         icon: Shirt,
         label: "Productos",
-        href: "/companies",
+        href: "/productos",
+    },
+    {
+        icon: Users,
+        label: "Categorias",
+        href: "/cateorias",
     },
     {
         icon: Users,
         label: "Clientes",
-        href: "/tasks",
+        href: "/clientes",
     },
     {
         icon: WalletCards,
@@ -55,5 +60,10 @@ export const dataSupportSidebar = [
         icon: ShieldCheck,
         label: "Security",
         href: "/security",
+    },
+    {
+        icon: ShieldCheck,
+        label: "Personalizacion",
+        href: "/personalizacion",
     },
 ];

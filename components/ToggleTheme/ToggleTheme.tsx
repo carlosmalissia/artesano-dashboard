@@ -3,7 +3,6 @@
 import * as React from "react"
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -14,6 +13,13 @@ import {
 
 export function ToggleTheme() {
     const { setTheme } = useTheme()
+    const [mounted, setMounted] = React.useState(false)
+
+    React.useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) return null // Evita el render hasta que el cliente esté listo
 
     return (
         <DropdownMenu>
