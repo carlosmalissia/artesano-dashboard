@@ -9,61 +9,120 @@ import {
     WalletCards
 } from "lucide-react";
 
-export const dataGeneralSidebar = [
+export const dataGeneralSidebarAdmin = [
     {
         icon: PanelsTopLeft,
         label: "Dashboard",
-        href: "/",
+        href: "/admin",
     },
     {
         icon: Shirt,
         label: "Productos",
-        href: "/productos",
+        href: "/admin/productos",
     },
     {
         icon: Users,
         label: "Categorias",
-        href: "/cateorias",
+        href: "/admin/categorias",
     },
     {
         icon: Users,
         label: "Clientes",
-        href: "/clientes",
+        href: "/admin/clientes",
     },
     {
         icon: WalletCards,
         label: "Facturas",
-        href: "/facturas",
+        href: "/admin/facturas",
     },
 ];
 
-export const dataToolsSidebar = [
+export const dataGeneralSidebarVendedor = [
+    {
+        icon: PanelsTopLeft,
+        label: "Dashboard",
+        href: "/vendedor",
+    },
+    {
+        icon: Shirt,
+        label: "Productos",
+        href: "/vendedor/productos",
+    },
+    {
+        icon: Users,
+        label: "Categorias",
+        href: "/vendedor/categorias",
+    },
+    {
+        icon: Users,
+        label: "Clientes",
+        href: "/vendedor/clientes",
+    },
+    {
+        icon: WalletCards,
+        label: "Facturas",
+        href: "/vendedor/facturas",
+    },
+];
+
+export const dataToolsSidebarAdmin = [
     {
         icon: CircleHelpIcon,
         label: "Faqs",
-        href: "/faqs",
+        href: "/admin/faqs",
     },
     {
         icon: BarChart4,
         label: "Analytics",
-        href: "/analytics",
+        href: "/admin/analytics",
     },
 ];
 
-export const dataSupportSidebar = [
+export const dataSupportSidebarAdmin = [
     {
         icon: Settings,
         label: "Setting",
-        href: "/setting",
+        href: "/admin/setting",
     },
     {
         icon: ShieldCheck,
         label: "Security",
-        href: "/security",
+        href: "/admin/security",
     },
     {
         icon: ShieldCheck,
         label: "Personalizacion",
-        href: "/personalizacion",
+        href: "/admin/personalizacion",
+    },
+];
+
+export const dataToolsSidebarVendedor = [
+    {
+        icon: CircleHelpIcon,
+        label: "Faqs",
+        href: "/vendedor/faqs",
+    },
+    {
+        icon: BarChart4,
+        label: "Analytics",
+        href: "/vendedor/analytics",
+    },
+];
+
+export const dataSupportSidebarVendedor = [
+    {
+        icon: Settings,
+        label: "Setting",
+        href: "/vendedor/setting",
+    },
+    {
+        icon: ShieldCheck,
+        label: "Security",
+        href: "/vendedor/security",
+    },
+    {
+        icon: ShieldCheck,
+        label: "Personalizacion",
+        href: "/vendedor/personalizacion",
     },
 ];
