@@ -13,9 +13,16 @@ import { CirclePlus } from "lucide-react"
 import { SetStateAction, useState } from "react";
 import { FormCreateProduct } from "../FormCreateProduct/FormCreateProduct"
 
-export function HeaderProduct() {
-    const [openModalCreate, setOpenModalCreate] = useState(false)
+type Props = {
+    userId: string;
+};
 
+export function HeaderProduct({ userId }: Props) {
+    const [openModalCreate, setOpenModalCreate] = useState(false)
+    const handleSuccess = () => {
+        setOpenModalCreate(false);
+        // acá podrías llamar a refetch() si lo necesitás en el futuro
+    };
     return (
         <div className="flex justify-between items-center">
             <h2 className="text-2xl">Listado de Productos</h2>
@@ -33,9 +40,8 @@ export function HeaderProduct() {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <FormCreateProduct setOpenModalCreate={function (value: SetStateAction<boolean>): void {
-                        throw new Error("Function not implemented.");
-                    }} />
+                    <FormCreateProduct userId={userId}
+                        onSuccess={handleSuccess} />
 
 
                 </DialogContent>

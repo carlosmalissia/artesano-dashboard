@@ -13,27 +13,27 @@ export const dataGeneralSidebarAdmin = [
     {
         icon: PanelsTopLeft,
         label: "Dashboard",
-        href: "/admin",
+        href: "/dashboard/admin",
     },
     {
         icon: Shirt,
         label: "Productos",
-        href: "/admin/productos",
+        href: "/dashboard/admin/productos",
     },
     {
         icon: Users,
         label: "Categorias",
-        href: "/admin/categorias",
+        href: "/dashboard/admin/categorias",
     },
     {
         icon: Users,
         label: "Clientes",
-        href: "/admin/clientes",
+        href: "/dashboard/admin/clientes",
     },
     {
         icon: WalletCards,
         label: "Facturas",
-        href: "/admin/facturas",
+        href: "/dashboard/admin/facturas",
     },
 ];
 
@@ -41,27 +41,27 @@ export const dataGeneralSidebarVendedor = [
     {
         icon: PanelsTopLeft,
         label: "Dashboard",
-        href: "/vendedor",
+        href: "/dashboard/vendedor",
     },
     {
         icon: Shirt,
         label: "Productos",
-        href: "/vendedor/productos",
+        href: "/dashboard/vendedor/productos",
     },
     {
         icon: Users,
         label: "Categorias",
-        href: "/vendedor/categorias",
+        href: "/dashboard/vendedor/categorias",
     },
     {
         icon: Users,
         label: "Clientes",
-        href: "/vendedor/clientes",
+        href: "/dashboard/vendedor/clientes",
     },
     {
         icon: WalletCards,
         label: "Facturas",
-        href: "/vendedor/facturas",
+        href: "/dashboard/vendedor/facturas",
     },
 ];
 
@@ -69,12 +69,12 @@ export const dataToolsSidebarAdmin = [
     {
         icon: CircleHelpIcon,
         label: "Faqs",
-        href: "/admin/faqs",
+        href: "/dashboard/admin/faqs",
     },
     {
         icon: BarChart4,
         label: "Analytics",
-        href: "/admin/analytics",
+        href: "/dashboard/admin/analytics",
     },
 ];
 
@@ -82,17 +82,17 @@ export const dataSupportSidebarAdmin = [
     {
         icon: Settings,
         label: "Setting",
-        href: "/admin/setting",
+        href: "/dashboard/admin/setting",
     },
     {
         icon: ShieldCheck,
         label: "Security",
-        href: "/admin/security",
+        href: "/dashboard/admin/security",
     },
     {
         icon: ShieldCheck,
         label: "Personalizacion",
-        href: "/admin/personalizacion",
+        href: "/dashboard/admin/personalizacion",
     },
 ];
 
@@ -100,12 +100,12 @@ export const dataToolsSidebarVendedor = [
     {
         icon: CircleHelpIcon,
         label: "Faqs",
-        href: "/vendedor/faqs",
+        href: "/dashboard/vendedor/faqs",
     },
     {
         icon: BarChart4,
         label: "Analytics",
-        href: "/vendedor/analytics",
+        href: "/dashboard/vendedor/analytics",
     },
 ];
 
@@ -113,16 +113,16 @@ export const dataSupportSidebarVendedor = [
     {
         icon: Settings,
         label: "Setting",
-        href: "/vendedor/setting",
+        href: "/dashboard/vendedor/setting",
     },
     {
         icon: ShieldCheck,
         label: "Security",
-        href: "/vendedor/security",
+        href: "/dashboard/vendedor/security",
     },
     {
         icon: ShieldCheck,
         label: "Personalizacion",
-        href: "/vendedor/personalizacion",
+        href: "/dashboard/vendedor/personalizacion",
     },
 ];

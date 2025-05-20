@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
-import { SidebarItem } from '../SidebarItem'
+import { SidebarItem } from '../SidebarItem';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
 
 import {
   dataGeneralSidebarAdmin,
@@ -11,17 +11,16 @@ import {
   dataGeneralSidebarVendedor,
   dataSupportSidebarVendedor,
   dataToolsSidebarVendedor,
-} from './SidebarRoutes.data'
+} from './SidebarRoutes.data';
 
-import { useUser } from '@/hooks/useUser' // suposición de un hook para obtener el usuario logueado
+type Props = {
+  rol: 'admin' | 'vendedor' | 'usuario';
+};
 
-export function SidebarRoutes() {
-  const { user } = useUser()
-  const rol = user?.rol
-
-  const dataGeneral = rol === 'admin' ? dataGeneralSidebarAdmin : dataGeneralSidebarVendedor
-  const dataTools = rol === 'admin' ? dataToolsSidebarAdmin : dataToolsSidebarVendedor
-  const dataSupport = rol === 'admin' ? dataSupportSidebarAdmin : dataSupportSidebarVendedor
+export function SidebarRoutesClient({ rol }: Props) {
+  const dataGeneral = rol === 'admin' ? dataGeneralSidebarAdmin : dataGeneralSidebarVendedor;
+  const dataTools = rol === 'admin' ? dataToolsSidebarAdmin : dataToolsSidebarVendedor;
+  const dataSupport = rol === 'admin' ? dataSupportSidebarAdmin : dataSupportSidebarVendedor;
 
   return (
     <div className='flex flex-col justify-between h-full'>
@@ -66,5 +65,5 @@ export function SidebarRoutes() {
         </footer>
       </div>
     </div>
-  )
+  );
 }

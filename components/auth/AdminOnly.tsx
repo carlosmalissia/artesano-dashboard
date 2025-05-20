@@ -1,28 +1,19 @@
-"use client";
+'use client';
 
-import { ReactNode, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/useUser";
-import { toast } from "sonner";
+type Props = {
+    user: any; // o mejor: { id: string; rol: string; nombre: string; ... }
+};
 
-interface Props {
-    children: ReactNode;
+export default function AdminOnly({ user }: Props) {
+    if (!user || user.rol !== 'admin') {
+        return <p>No estás autorizado para ver esta página.</p>;
+    }
+
+    return (
+        <div>
+            <h1>Panel del Administrador</h1>
+            <p>Bienvenido, {user.nombre}</p>
+        </div>
+    );
 }
 
-export default function AdminOnly({ children }: Props) {
-    const { user } = useUser();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (user && user.rol !== "admin") {
-            toast.warning("Acceso denegado. Serás redirigido al login en 5 segundos...");
-            setTimeout(() => {
-                router.push("/login");
-            }, 5000);
-        }
-    }, [user, router]);
-
-    if (!user || user.rol !== "admin") return null;
-
-    return <>{children}</>;
-}

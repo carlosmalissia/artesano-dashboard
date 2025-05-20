@@ -1,6 +1,6 @@
 import { Logo } from "@/components/Logo";
 
-import { SidebarRoutes } from "../SidebarRoutes";
+import SidebarRoutes from "@/components-server/SidebarRoutes";
 
 export function Sidebar() {
     return (

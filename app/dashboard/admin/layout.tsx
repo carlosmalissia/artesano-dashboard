@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/Sidebar"
 import { Navbar } from "@/components/Navbar"
-import { getUserFromToken } from "@/lib/auth"
+import { getUserFromToken } from "@/lib-server/auth/auth"
 import type { User } from "@/components/types/user"
 
 export default async function LayoutDashboard({

@@ -10,19 +10,21 @@ import Image from "next/image";
 
 
 export type Product = {
-    _id: string
-    image: string
-    title: string
-    description: string
-    profileImage: string
-    price: number
-    stock: number
-    isDeleted: string
-    category: { name: string }
-    created: string
-    updated?: string
+    _id: string;
+    nombre: string;
+    descripcion?: string;
+    precio: number;
+    stock: number;
+    image?: string;
+    isDeleted?: boolean;
+    categoriaId: {
+        _id: string;
+        nombre: string;
+    };
     vendedorId: string;
-}
+    fechaCreacion: string;
+    fechaActualizacion?: string;
+};
 
 export const columns: ColumnDef<Product>[] = [
     {

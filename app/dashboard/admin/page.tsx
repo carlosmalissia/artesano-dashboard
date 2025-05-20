@@ -1,13 +1,8 @@
-import AdminOnly from "@/components/auth/AdminOnly"
+import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
+import AdminOnly from "@/components/auth/AdminOnly";
 
-export default function AdminDashboard() {
-  return (
-    <AdminOnly>
-      <div className="p-6 text-2xl font-bold">
+export default async function AdminPage() {
+  const user = await getUserFromCookie();
 
-        Bienvenido al Dashboard del Administrador
-      </div>
-    </AdminOnly>
-
-  );
+  return <AdminOnly user={user} />;
 }

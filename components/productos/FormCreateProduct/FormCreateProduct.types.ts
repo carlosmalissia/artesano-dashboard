@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react"
-
+import { Dispatch, SetStateAction } from "react";
 
 export type FormCreateProductProps = {
-    setOpenModalCreate: Dispatch<SetStateAction<boolean>>
-}
+
+    userId: string;
+    onSuccess?: () => void;
+};

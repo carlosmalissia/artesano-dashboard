@@ -1,3 +1,4 @@
+"use client"
 
 import { columns, Product } from "./columns"
 import { DataTable } from "./data-table"
@@ -8,17 +9,21 @@ import {
   useUpdateProductoMutation,
   useDeleteProductoMutation
 } from "@/redux/services/productosApi";
-import { useUser } from "@/hooks/useUser";
+type Props = {
+  userId: string;
+};
 
-export function ListProducts() {
-  const { user } = useUser();
-  const { data, error, isLoading, isFetching } = useGetProductosQuery(null);
+export function ListProducts({ userId }: Props) {
+  const { data, isLoading, error } = useGetProductosQuery(null);
 
-  const productosVendedor = data?.filter(
-    (producto: Product) => producto.vendedorId === user?.id
-  ) || [];
+  // Debug momentáneo
+  console.log("data recibida:", data);
 
-  return (
-    <DataTable columns={columns} data={productosVendedor} />
+  const productos = Array.isArray(data) ? data : data?.productos ?? []; // ajuste por si viene como { productos: [...] }
+
+  const productosVendedor = productos.filter(
+    (producto: Product) => producto.vendedorId === userId
   );
+
+  return <DataTable columns={columns} data={productosVendedor} />;
 }

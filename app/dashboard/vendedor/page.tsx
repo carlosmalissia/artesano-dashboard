@@ -1,13 +1,10 @@
-import LogoutButton from "@/components/logout-button/logout-button"
-import VendedorOnly from "@/components/auth/VendedorOnly"
+import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
+import VendedorOnly from "@/components/auth/VendedorOnly";
 
-export default function VendedorDashboard() {
-  return (
-    <VendedorOnly>
-      <div className="p-6 text-white text-2xl font-bold">
-        Bienvenido al Dashboard del Vendedor
-      </div>
-    </VendedorOnly>
+export default async function VendedorPage() {
+  const user = await getUserFromCookie();
 
-  );
+  return <VendedorOnly user={user}>
+    <h1> Este es el dashboard de vendedor</h1>
+  </VendedorOnly>;
 }

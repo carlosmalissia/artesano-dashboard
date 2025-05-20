@@ -1,28 +1,18 @@
-"use client";
+'use client';
 
-import { ReactNode, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/useUser";
-import { toast } from "sonner";
+import { ReactNode } from 'react';
+import { UserPayload } from '@/types/auth'; // si ya lo definiste
 
-interface Props {
+type Props = {
+    user: UserPayload | null;
     children: ReactNode;
-}
+};
 
-export default function VendedorOnly({ children }: Props) {
-    const { user } = useUser();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (user && user.rol !== "vendedor") {
-            toast.warning("Acceso denegado. Serás redirigido al login en 5 segundos...");
-            setTimeout(() => {
-                router.push("/login");
-            }, 5000);
-        }
-    }, [user, router]);
-
-    if (!user || user.rol !== "vendedor") return null;
+export default function VendedorOnly({ user, children }: Props) {
+    if (!user || user.rol !== 'vendedor') {
+        return <p>No autorizado</p>;
+    }
 
     return <>{children}</>;
 }
+

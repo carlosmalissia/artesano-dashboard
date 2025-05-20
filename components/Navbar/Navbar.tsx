@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ToggleTheme } from "@/components/ToggleTheme"
 import LogoutButton from "@/components/logout-button/logout-button"
-import { SidebarRoutes } from "../SidebarRoutes"
+import { SidebarRoutes } from "../SidebarRoutesClient"
 
 type User = {
     nombre: string

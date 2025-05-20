@@ -1,13 +1,18 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { useAuthRedirect } from "@/hooks/useAuthRedirect";
+type Props = {
+    user: any;
+};
 
-interface Props {
-    children: ReactNode;
-}
+export default function PrivatePage({ user }: Props) {
+    if (!user) {
+        return <p>Debés estar logueado para acceder.</p>;
+    }
 
-export default function PrivatePage({ children }: Props) {
-    useAuthRedirect();
-    return <>{children}</>;
+    return (
+        <div>
+            <h1>Zona Privada</h1>
+            <p>Hola {user.nombre} ({user.rol})</p>
+        </div>
+    );
 }
