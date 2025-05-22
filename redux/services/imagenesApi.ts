@@ -4,12 +4,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const imagenesApi = createApi({
     reducerPath: 'imagenesApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NEXT_PUBLIC_API_URL, // ej: http://localhost:4000/api
+        baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL, // ej: http://localhost:4000/api
     }),
     endpoints: (builder) => ({
         uploadImage: builder.mutation<{ imageUrl: string }, FormData>({
             query: (formData) => ({
-                url: '/upload',
+                url: '/api/images/upload',
                 method: 'POST',
                 body: formData,
             }),
@@ -17,7 +17,7 @@ export const imagenesApi = createApi({
 
         deleteImage: builder.mutation<{ message: string }, { imageUrl: string }>({
             query: ({ imageUrl }) => ({
-                url: '/remove',
+                url: '/api/images/remove',
                 method: 'DELETE',
                 body: { imageUrl },
             }),

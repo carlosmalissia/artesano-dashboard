@@ -1,4 +1,4 @@
-import { HeaderProduct } from "@/components/productos/HeaderProduct"
+
 import { ListProducts } from "@/components/productos/ListProducts"
 import VendedorOnly from "@/components/auth/VendedorOnly"
 import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
@@ -9,7 +9,6 @@ export default async function Companies() {
     return (
         <VendedorOnly user={user}>
             <div>
-                <HeaderProduct userId={user.id} />
                 <ListProducts userId={user?.id} />
             </div>
         </VendedorOnly>

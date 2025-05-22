@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -9,43 +10,55 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { CirclePlus } from "lucide-react"
-import { SetStateAction, useState } from "react";
-import { FormCreateProduct } from "../FormCreateProduct/FormCreateProduct"
+import { CirclePlus } from "lucide-react";
+import { useState } from "react";
+import { FormCreateProduct } from "../FormCreateProduct/FormCreateProduct";
 
 type Props = {
     userId: string;
+    refetchProductos: () => void; // ✅ Tipo añadido
 };
 
-export function HeaderProduct({ userId }: Props) {
-    const [openModalCreate, setOpenModalCreate] = useState(false)
+export function HeaderProduct({ userId, refetchProductos }: Props) {
+    const [openModalCreate, setOpenModalCreate] = useState(false);
+
     const handleSuccess = () => {
         setOpenModalCreate(false);
-        // acá podrías llamar a refetch() si lo necesitás en el futuro
+        refetchProductos(); // ✅ ejecuta la recarga de la tabla
     };
+
     return (
         <div className="flex justify-between items-center">
             <h2 className="text-2xl">Listado de Productos</h2>
 
             <Dialog open={openModalCreate} onOpenChange={setOpenModalCreate}>
                 <DialogTrigger asChild>
-                    <Button> Nuevo Producto</Button>
+                    <Button>
+                        <CirclePlus className="w-4 h-4 mr-2" />
+                        Nuevo Producto
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[625px]">
-                    <DialogHeader>
-                        <DialogTitle>Nuevo Producto</DialogTitle>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.25 }}
+                    >
+                        <DialogHeader>
+                            <DialogTitle>Nuevo Producto</DialogTitle>
+                            <DialogDescription>
+                                Crear y configurar nuevo producto
+                            </DialogDescription>
+                        </DialogHeader>
 
-                        <DialogDescription>
-                            Crear y configurar nuevo producto
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <FormCreateProduct userId={userId}
-                        onSuccess={handleSuccess} />
-
-
+                        <FormCreateProduct
+                            userId={userId}
+                            onSuccess={handleSuccess}
+                            refetchProductos={refetchProductos}
+                        />
+                    </motion.div>
                 </DialogContent>
             </Dialog>
         </div>
-    )
+    );
 }

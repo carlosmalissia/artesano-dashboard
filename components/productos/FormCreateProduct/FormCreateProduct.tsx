@@ -1,10 +1,12 @@
 'use client';
 
+import { Loader2 } from "lucide-react";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
     Form, FormControl, FormField, FormItem, FormLabel, FormMessage
 } from "@/components/ui/form";
@@ -12,27 +14,30 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select";
 import { useCreateProductoMutation } from "@/redux/services/productosApi";
 import { useUploadImageMutation } from "@/redux/services/imagenesApi";
+import { useGetCategoriasQuery } from "@/redux/services/categoriasApi";
 import { FormCreateProductProps } from "./FormCreateProduct.types";
 
 const formSchema = z.object({
     nombre: z.string().min(1, 'Nombre requerido'),
     descripcion: z.string().min(1, 'Descripción requerida'),
-    categoria: z.string().min(2),
+    categoriaId: z.string().min(1, 'Categoría requerida'), // 👈 CAMBIO AQUÍ
     precio: z.string().min(1, 'Precio requerido'),
     stock: z.string().min(1, 'Stock requerido'),
     image: z.string().min(1, 'Imagen requerida'),
 });
+type FormValues = z.infer<typeof formSchema>;
 
 export function FormCreateProduct(props: FormCreateProductProps) {
     const [imageUrl, setImageUrl] = useState('');
     const [uploadImage, { isLoading: uploading }] = useUploadImageMutation();
-    const [createProducto] = useCreateProductoMutation();
+    const [createProducto, { isLoading: creando }] = useCreateProductoMutation();
+    const { data: categorias, isLoading } = useGetCategoriasQuery();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             nombre: '',
-            categoria: '',
+            categoriaId: '', // 👈 AHORA SE LLAMA ASÍ
             descripcion: '',
             precio: '',
             stock: '',
@@ -66,11 +71,18 @@ export function FormCreateProduct(props: FormCreateProductProps) {
             };
 
             await createProducto(productoPayload).unwrap();
+            toast.success('✅ Producto creado correctamente', {
+                description: values.nombre,
+            });
             form.reset();
             setImageUrl('');
             props.onSuccess?.(); // cerrar modal o refrescar tabla
+            props.refetchProductos?.();    // Refresca la tabla
         } catch (error) {
             console.error("Error al crear producto", error);
+            toast.error('❌ Error al crear el producto', {
+                description: 'Verificá los datos e intentá de nuevo',
+            });
         }
     };
 
@@ -91,9 +103,11 @@ export function FormCreateProduct(props: FormCreateProductProps) {
                             </FormItem>
                         )}
                     />
+
+
                     <FormField
                         control={form.control}
-                        name="categoria"
+                        name="categoriaId"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Categoría</FormLabel>
@@ -104,15 +118,24 @@ export function FormCreateProduct(props: FormCreateProductProps) {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="Ropa de Hombre">Ropa de Hombre</SelectItem>
-                                        <SelectItem value="Ropa de Mujer">Ropa de Mujer</SelectItem>
-                                        <SelectItem value="Joyeria">Joyería</SelectItem>
+                                        {isLoading ? (
+                                            <div className="p-4 text-sm text-muted-foreground">
+                                                Cargando categorías...
+                                            </div>
+                                        ) : (
+                                            categorias?.map((cat) => (
+                                                <SelectItem key={cat._id} value={cat._id}>
+                                                    {cat.nombre}
+                                                </SelectItem>
+                                            ))
+                                        )}
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+
                     <FormField
                         name="descripcion"
                         control={form.control}
@@ -167,8 +190,15 @@ export function FormCreateProduct(props: FormCreateProductProps) {
                     />
                 </div>
 
-                <Button type="submit" disabled={uploading}>
-                    {uploading ? "Subiendo..." : "Crear Producto"}
+                <Button type="submit" disabled={uploading || creando}>
+                    {(uploading || creando) ? (
+                        <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            {uploading ? "Subiendo imagen..." : "Creando producto..."}
+                        </>
+                    ) : (
+                        "Crear Producto"
+                    )}
                 </Button>
             </form>
         </Form>

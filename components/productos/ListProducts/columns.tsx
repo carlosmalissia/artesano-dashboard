@@ -1,7 +1,7 @@
 "use Client"
 
 import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react"
-
+import { formatDate } from "@/util";
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -12,19 +12,23 @@ import Image from "next/image";
 export type Product = {
     _id: string;
     nombre: string;
-    descripcion?: string;
+    descripcion: string;
     precio: number;
     stock: number;
-    image?: string;
-    isDeleted?: boolean;
+    image: string;
+    vendedorId: {
+        _id: string;
+        nombre: string;
+        email: string;
+        avatar?: string;
+    };
     categoriaId: {
         _id: string;
         nombre: string;
     };
-    vendedorId: string;
     fechaCreacion: string;
-    fechaActualizacion?: string;
-};
+  fechaActualizacion: string;
+}
 
 export const columns: ColumnDef<Product>[] = [
     {
@@ -41,7 +45,7 @@ export const columns: ColumnDef<Product>[] = [
         }
     },
     {
-        accessorKey: "title",
+        accessorKey: "nombre",
         header: ({ column }) => {
             return (
                 <Button
@@ -54,15 +58,15 @@ export const columns: ColumnDef<Product>[] = [
         }
     },
     {
-        accessorKey: "description",
+        accessorKey: "descripcion",
         header: "Descripción"
     },
     {
-        accessorKey: "price",
+        accessorKey: "precio",
         header: "Precio"
     },
     {
-        accessorKey: "category.name",
+        accessorKey: "categoriaId.nombre",
         header: "Categoria"
     },
     {
@@ -74,13 +78,15 @@ export const columns: ColumnDef<Product>[] = [
         header: "Activo"
     },
     {
-        accessorKey: "created",
-        header: "Creado"
-    },
-    {
-        accessorKey: "updated",
-        header: "Editado"
-    },
+  accessorKey: "fechaCreacion",
+  header: "Creado",
+  cell: ({ row }) => formatDate(row.original.fechaCreacion),
+},
+{
+  accessorKey: "fechaActualizacion",
+  header: "Editado",
+  cell: ({ row }) => formatDate(row.original.fechaActualizacion),
+},
     {
         id: "actions",
         header: "Actions",

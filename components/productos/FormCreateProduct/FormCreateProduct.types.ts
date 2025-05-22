@@ -4,4 +4,5 @@ export type FormCreateProductProps = {
 
     userId: string;
     onSuccess?: () => void;
+    refetchProductos?: () => void;
 };
