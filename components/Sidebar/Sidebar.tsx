@@ -2,6 +2,7 @@ import { Logo } from "@/components/Logo";
 
 import SidebarRoutes from "@/components-server/SidebarRoutes";
 
+
 export function Sidebar() {
     return (
         <div className="h-screen">

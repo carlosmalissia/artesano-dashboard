@@ -3,6 +3,7 @@ import { Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ReduxProvider } from "@/app/redux-provider"; // 👉 importamos el ReduxProvider
+import { Toaster } from "sonner";
 
 const noto = Noto_Sans_Display({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </ReduxProvider>
       </body>
