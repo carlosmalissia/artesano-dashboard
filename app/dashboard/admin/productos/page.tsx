@@ -1,15 +1,16 @@
-
-import VendedorOnly from "@/components/auth/VendedorOnly";
+import AdminOnly from "@/components/auth/AdminOnly";
 import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
-import { ProductosClient } from "./ProductosClient";
+import { ProductosAdmin } from "./ProductosAdmin";
+
 
 export default async function Companies() {
   const user = await getUserFromCookie();
   if (!user) return <p>Usuario no autenticado</p>;
 
   return (
-    <VendedorOnly user={user}>
-      <ProductosClient userId={user.id} />
-    </VendedorOnly>
+   
+        <ProductosAdmin userId={user.id} />
+    
   );
 }
+

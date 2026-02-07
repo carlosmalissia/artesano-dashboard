@@ -9,12 +9,25 @@ export async function POST(req: Request) {
       email,
       password,
     }, {
-      withCredentials: true, // 👈 necesario para que la cookie del backend se guarde
+      withCredentials: true,
     });
 
-    return NextResponse.json({ success: true, usuario: res.data.usuario });
+    const token = res.data.token;
+    const response = NextResponse.json({ success: true, usuario: res.data.usuario });
+
+    if (token) {
+      response.cookies.set("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24,
+      });
+    }
+
+    return response;
   } catch (err) {
     console.error("Error en login:", err);
-    return NextResponse.json({ success: false, message: 'Login fallido' }, { status: 401 });
+    return NextResponse.json({ success: false, message: "Login fallido" }, { status: 401 });
   }
 }
