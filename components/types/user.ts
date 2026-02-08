@@ -1,5 +1,5 @@
 export type User = {
-    id: string
+    _id: string
     rol: "admin" | "vendedor"
     nombre: string
     avatar?: string

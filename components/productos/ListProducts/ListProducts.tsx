@@ -1,22 +1,23 @@
 "use client"
 
-import { ProductSkeleton } from "../ProductSkeleton";
-import { motion } from "framer-motion";
-import { HeaderProduct } from "@/components/productos/HeaderProduct"
+import { ProductSkeleton } from "../ProductSkeleton"
+import { motion } from "framer-motion"
 import { getColumns } from "./columns"
 import { DataTable } from "./data-table"
-import { Product } from "@/components/types/product";
+import { Product } from "@/components/types/product"
 
 type Props = {
-  productos: Product[];
-  isLoading: boolean;
-  refetchProductos: () => void;
-};
+  productos: Product[]
+  isLoading: boolean
+  refetchProductos: () => void
+  isAdmin?: boolean
+}
 
 export function ListProducts({
   productos,
   isLoading,
   refetchProductos,
+  isAdmin = false,
 }: Props) {
   return (
     <>
@@ -34,11 +35,15 @@ export function ListProducts({
           transition={{ duration: 0.3 }}
         >
           <DataTable
-            columns={getColumns(refetchProductos)}
+            columns={getColumns({
+              isAdmin,
+              refetchProductos,
+            })}
             data={productos}
           />
         </motion.div>
       )}
     </>
-  );
+  )
 }
+

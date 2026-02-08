@@ -4,5 +4,11 @@ import AdminOnly from "@/components/auth/AdminOnly";
 export default async function AdminPage() {
   const user = await getUserFromCookie();
 
-  return <AdminOnly user={user} />;
+  if (!user) return <p>Usuario no autenticado</p>;
+
+  return (
+    <AdminOnly user={user}>
+      <h1>Este es el dashboard de admin</h1>
+    </AdminOnly>
+  );
 }
