@@ -19,7 +19,41 @@ export const usuarioApi = createApi({
       query: () => '/api/usuarios',
       providesTags: ['Usuario'],
     }),
+    getUsuarioById: builder.query({
+            query: (id: string) => `/api/usuarios/${id}`,
+            providesTags: ['Usuario'],
+        }),
+        createUsuario: builder.mutation({
+            query: (nuevoUsuario) => ({
+                url: '/api/usuarios',
+                method: 'POST',
+                body: nuevoUsuario,
+            }),
+            invalidatesTags: ['Usuario'],
+        }),
+        updateUsuario: builder.mutation({
+            query: ({ id, ...data }) => ({
+                url: `/api/usuarios/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['Usuario'],
+        }),
+        deleteUsuario: builder.mutation({
+            query: (id: string) => ({
+                url: `/api/usuarios/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Usuario'],
+        }),
   }),
 });
 
-export const { useLoginMutation, useGetUsuariosQuery } = usuarioApi;
+export const { 
+  useLoginMutation,
+   useGetUsuariosQuery, 
+   useCreateUsuarioMutation,
+   useGetUsuarioByIdQuery,
+   useDeleteUsuarioMutation,
+   useUpdateUsuarioMutation
+  } = usuarioApi;

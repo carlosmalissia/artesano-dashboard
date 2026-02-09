@@ -27,12 +27,6 @@ export function ProductosAdmin({ userId, isAdmin }: Props) {
   const { data, isLoading, refetch } = useGetProductosQuery(null);
   const { data: usuarios } = useGetUsuariosQuery(null);
 
-  useEffect(() => {
-  if (usuarios) {
-    console.log("Usuarios recibidos:", usuarios);
-  }
-}, [usuarios]);
-  
   
   const vendedores = usuarios?.filter(
   (u: User) => u.rol === "vendedor"

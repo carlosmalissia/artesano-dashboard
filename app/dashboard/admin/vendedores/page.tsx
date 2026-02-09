@@ -1,6 +1,6 @@
 import AdminOnly from "@/components/auth/AdminOnly";
 import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
-import { ProductosAdmin } from "./ProductosAdmin";
+import { Vendedores } from "./Vendedores";
 
 export default async function Page() {
   const user = await getUserFromCookie();
@@ -8,7 +8,7 @@ export default async function Page() {
 
   return (
     <AdminOnly user={user}>
-      <ProductosAdmin
+      <Vendedores
         userId={user.id}
         isAdmin={user.rol === "admin"}
       />

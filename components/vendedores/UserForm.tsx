@@ -1,0 +1,144 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import {
+    Form,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormControl,
+    FormMessage,
+} from "@/components/ui/form"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { toast } from "sonner"
+import { useGetCategoriasQuery } from "@/redux/services/categoriasApi"
+
+const formSchema = z.object({
+    nombre: z.string().min(1),
+    email: z.string().min(1),
+    avatar: z.string().optional(),
+})
+
+export type FormData = z.infer<typeof formSchema>
+
+type Props = {
+    modo: "create" | "edit"
+    initialValues?: FormData
+    onSubmit: (values: FormData, imageUrl: string) => Promise<void>
+    defaultImage?: string
+    loading?: boolean
+}
+
+export function UserForm({ modo, initialValues, onSubmit, defaultImage, loading }: Props) {
+    const form = useForm<FormData>({
+        resolver: zodResolver(formSchema),
+        defaultValues: initialValues || {
+            nombre: "",
+            email: "",
+            avatar: "",
+        },
+    })
+
+    const [uploading, setUploading] = useState(false)
+    const [imageUrl, setImageUrl] = useState("")
+
+    const { data: categorias = [] } = useGetCategoriasQuery()
+
+    useEffect(() => {
+        if (initialValues) {
+            form.reset(initialValues)
+            setImageUrl(initialValues.avatar || "")
+        }
+    }, [initialValues])
+
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        const formData = new FormData()
+        formData.append("image", file)
+
+        try {
+            setUploading(true)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/images/upload`, {
+                method: "POST",
+                body: formData,
+                credentials: "include",
+            })
+            const data = await res.json()
+            setImageUrl(data.imageUrl)
+            toast.success("Imagen subida con éxito")
+        } catch (err) {
+            console.error("Error al subir imagen", err)
+            toast.error("Error al subir imagen")
+        } finally {
+            setUploading(false)
+        }
+    }
+
+    const handleSubmit = (values: FormData) => {
+        onSubmit(values, imageUrl || defaultImage || "")
+    }
+
+    return (
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+                <FormField
+                    control={form.control}
+                    name="nombre"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Nombre</FormLabel>
+                            <FormControl><Input {...field} /></FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )} />
+
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl><Input {...field} /></FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )} />
+
+                <FormField
+                    control={form.control}
+                    name="avatar"
+                    render={() => (
+                        <FormItem>
+                            <FormLabel>Imagen</FormLabel>
+                            <FormControl>
+                                <Input type="file" onChange={handleImageChange} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )} />
+
+                <Button type="submit" disabled={uploading || loading}>
+                    {modo === "edit"
+                        ? uploading
+                            ? "Actualizando imagen..."
+                            : "Actualizar"
+                        : uploading
+                            ? "Subiendo imagen..."
+                            : "Crear Vendedor"}
+                </Button>
+            </form>
+        </Form>
+    )
+}
