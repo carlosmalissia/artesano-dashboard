@@ -61,7 +61,7 @@ export function SidebarRoutesClient({ rol }: Props) {
         <Separator />
 
         <footer className='mt-3 p-3 text-center'>
-          2025. All rights reserved
+          2026. All rights reserved for Carlos Malissia
         </footer>
       </div>
     </div>

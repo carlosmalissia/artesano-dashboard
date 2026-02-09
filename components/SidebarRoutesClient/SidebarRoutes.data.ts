@@ -27,6 +27,11 @@ export const dataGeneralSidebarAdmin = [
     },
     {
         icon: Users,
+        label: "Vendedores",
+        href: "/dashboard/admin/vendedores",
+    },
+    {
+        icon: Users,
         label: "Clientes",
         href: "/dashboard/admin/clientes",
     },

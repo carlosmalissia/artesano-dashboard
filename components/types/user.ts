@@ -3,4 +3,6 @@ export type User = {
     rol: "admin" | "vendedor"
     nombre: string
     avatar?: string
+    fechaCreacion: string;
+    fechaActualizacion: string;
 }
