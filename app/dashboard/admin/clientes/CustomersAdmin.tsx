@@ -12,7 +12,7 @@ type Props = {
   customer: boolean
 };
 
-export function Vendedores({ userId, isAdmin, customer }: Props) {
+export function CustomersAdmin({ userId, isAdmin, customer }: Props) {
     
     const { data, isLoading, refetch } = useGetUsuariosQuery(null);
 
@@ -21,7 +21,7 @@ export function Vendedores({ userId, isAdmin, customer }: Props) {
     : data?.usuarios ?? [];
 
     const UsuariosFiltrados = usuarios.filter(
-        (u:User) => (u.rol === "vendedor")
+        (u:User) => (u.rol === "usuario")
     ) 
     
     return (

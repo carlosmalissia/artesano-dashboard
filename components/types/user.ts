@@ -1,6 +1,6 @@
 export type User = {
     _id: string
-    rol: "admin" | "vendedor"
+    rol: "admin" | "vendedor" | "usuario"
     nombre: string
     avatar?: string
     fechaCreacion: string;
