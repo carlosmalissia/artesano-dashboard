@@ -17,9 +17,10 @@ import { FormCreateSeller } from "../FormCreateSeller/FormCreateSeller";
 type Props = {
     userId: string;
     refetchVendedores: () => void; // ✅ Tipo añadido
+    customer: boolean
 };
 
-export function HeaderSellers({ userId, refetchVendedores }: Props) {
+export function HeaderSellers({ userId, refetchVendedores, customer }: Props) {
     const [openModalCreate, setOpenModalCreate] = useState(false);
 
     const handleSuccess = () => {
@@ -29,13 +30,15 @@ export function HeaderSellers({ userId, refetchVendedores }: Props) {
 
     return (
         <div className="flex justify-between items-center">
-            <h2 className="text-2xl">Listado de Vendedores</h2>
-
+            <h2 className="text-2xl">
+                {customer ? ("Listado de Usuarios"):("Listado de Vendedores")}
+            </h2>
             <Dialog open={openModalCreate} onOpenChange={setOpenModalCreate}>
                 <DialogTrigger asChild>
                     <Button>
                         <CirclePlus className="w-4 h-4 mr-2" />
-                        Nuevo Vendedor
+                            {customer ? ("Nuevo Usuario"): ("Nuevo vendedor")}
+                            
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[625px]">

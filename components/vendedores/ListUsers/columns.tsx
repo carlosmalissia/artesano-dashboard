@@ -34,7 +34,7 @@ export const getColumns = ({
         return (
           <div className="px-3">
             <Image
-              src={typeof image === "string" ? image : "/image/product-icon.png"}
+              src={typeof image === "string" ? image : "/image/avatarPorDefecto.jpg"}
               width={40}
               height={40}
               alt="Image"
@@ -51,7 +51,7 @@ export const getColumns = ({
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nombre Vendedor
+          Nombre
           <ArrowUpDown className="w-4 h-4 ml-2" />
         </Button>
       )
