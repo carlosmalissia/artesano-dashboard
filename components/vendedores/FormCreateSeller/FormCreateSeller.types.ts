@@ -5,4 +5,5 @@ export type FormCreateSellerProps = {
     userId: string;
     onSuccess?: () => void;
     refetchUsuario?: () => void;
+    customer: boolean
 };
