@@ -53,11 +53,7 @@ export const dataGeneralSidebarVendedor = [
         label: "Productos",
         href: "/dashboard/vendedor/productos",
     },
-    {
-        icon: Users,
-        label: "Categorias",
-        href: "/dashboard/vendedor/categorias",
-    },
+    
     {
         icon: Users,
         label: "Clientes",

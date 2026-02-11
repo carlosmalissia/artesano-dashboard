@@ -38,9 +38,10 @@ type Props = {
     onSubmit: (values: FormData, imageUrl: string) => Promise<void>
     defaultImage?: string
     loading?: boolean
+    customer: boolean
 }
 
-export function UserForm({ modo, initialValues, onSubmit, defaultImage, loading }: Props) {
+export function UserForm({ modo, initialValues, onSubmit, defaultImage, loading, customer }: Props) {
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: initialValues || {
@@ -136,7 +137,7 @@ export function UserForm({ modo, initialValues, onSubmit, defaultImage, loading 
                             : "Actualizar"
                         : uploading
                             ? "Subiendo imagen..."
-                            : "Crear Vendedor"}
+                            : "Crear nuevo"}
                 </Button>
             </form>
         </Form>

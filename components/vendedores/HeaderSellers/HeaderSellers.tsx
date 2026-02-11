@@ -17,7 +17,8 @@ import { FormCreateSeller } from "../FormCreateSeller/FormCreateSeller";
 type Props = {
     userId: string;
     refetchVendedores: () => void; // ✅ Tipo añadido
-    customer: boolean
+    customer: boolean;
+    
 };
 
 export function HeaderSellers({ userId, refetchVendedores, customer }: Props) {
@@ -48,9 +49,10 @@ export function HeaderSellers({ userId, refetchVendedores, customer }: Props) {
                         transition={{ duration: 0.25 }}
                     >
                         <DialogHeader>
-                            <DialogTitle>Nuevo Vendedor</DialogTitle>
+                            {customer ? (<DialogTitle>Nuevo Cliente</DialogTitle>)
+                            : (<DialogTitle>Nuevo Vendedor</DialogTitle>)}
                             <DialogDescription>
-                                Crear y configurar nuevo vendedor
+                                Crear y configurar nuevo
                             </DialogDescription>
                         </DialogHeader>
 
@@ -58,6 +60,7 @@ export function HeaderSellers({ userId, refetchVendedores, customer }: Props) {
                             userId={userId}
                             onSuccess={handleSuccess}
                             refetchUsuario={refetchVendedores}
+                            customer= {customer}
                         />
                     </motion.div>
                 </DialogContent>
