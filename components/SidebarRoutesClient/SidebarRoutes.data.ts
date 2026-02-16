@@ -62,7 +62,7 @@ export const dataGeneralSidebarVendedor = [
     {
         icon: WalletCards,
         label: "Facturas",
-        href: "/dashboard/vendedor/facturas",
+        href: "/dashboard/vendedor/Order",
     },
 ];
 

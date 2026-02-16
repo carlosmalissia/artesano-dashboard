@@ -4,6 +4,7 @@ import { productosApi } from './services/productosApi';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { imagenesApi } from './services/imagenesApi';
 import { categoriasApi } from './services/categoriasApi';
+import { orderApi } from "./services/orderApi";
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         [productosApi.reducerPath]: productosApi.reducer,
         [imagenesApi.reducerPath]: imagenesApi.reducer,
         [categoriasApi.reducerPath]: categoriasApi.reducer,
+        [orderApi.reducerPath]: orderApi.reducer
 
     },
     middleware: (getDefaultMiddleware) =>
@@ -19,6 +21,7 @@ export const store = configureStore({
             productosApi.middleware,
             imagenesApi.middleware,
             categoriasApi.middleware,
+            orderApi.middleware
         ),
 });
 

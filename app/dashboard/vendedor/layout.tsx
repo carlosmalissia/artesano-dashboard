@@ -2,13 +2,14 @@ import { Sidebar } from "@/components/Sidebar"
 import { Navbar } from "@/components/Navbar"
 import { getUserFromToken } from "@/lib-server/auth/auth"
 import type { User } from "@/components/types/user"
+import { UserPayload } from '@/types/auth';
 
 export default async function LayoutDashboard({
     children,
 }: {
     children: React.ReactNode
 }) {
-    const user = await getUserFromToken() as User
+    const user = await getUserFromToken() as UserPayload
 
     return (
         <div className="flex w-full h-full">
