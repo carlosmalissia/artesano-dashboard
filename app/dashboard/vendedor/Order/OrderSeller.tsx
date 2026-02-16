@@ -1,5 +1,6 @@
 'use client'
 import { HeaderOrder } from "@/components/ordenes/HeaderOrder";
+import { ListOrders } from "@/components/ordenes/ListOrders";
 import { useGetOrdenesQuery } from "@/redux/services/orderApi";
 import { Order } from "@/components/types/order";
 
@@ -14,18 +15,23 @@ export function OrderSeller({userId}:Props) {
         : data?.ordenes ?? [];
     
       const ordenesVendedor = ordenes.filter(
-        (ordenes: Order) => ordenes.vendedorId?._id === userId
+        (ordenes: Order) => ordenes.vendedor?._id === userId
       );
 console.log("UserId: ", userId);
-
+console.log("ORDEN VENDEDOR", ordenes);
     return (
         <>
         
             <HeaderOrder
                     userId={userId}
                     refetchOrder={refetch}
+                    ordenes= {ordenesVendedor}
                   />
-        
+            <ListOrders
+                    ordenes={ordenesVendedor}
+                    isLoading={isLoading}
+                    refetchOrder={refetch}
+                  />
         </>
     )
 }

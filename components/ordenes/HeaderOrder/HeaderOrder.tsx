@@ -13,13 +13,15 @@ import {
 import { CirclePlus } from "lucide-react";
 import { useState } from "react";
 import { FormCreateOrder } from "../FormCreateOrder/FormCreateOrder";
+import { Order } from "@/components/types/order"
 
 type Props = {
     userId: string;
-    refetchOrder: () => void; // ✅ Tipo añadido
+    refetchOrder: () => void;
+    ordenes: any // ✅ Tipo añadido
 };
 
-export function HeaderOrder({ userId, refetchOrder }: Props) {
+export function HeaderOrder({ userId, refetchOrder, ordenes }: Props) {
     const [openModalCreate, setOpenModalCreate] = useState(false);
 
     const handleSuccess = () => {
@@ -30,6 +32,8 @@ export function HeaderOrder({ userId, refetchOrder }: Props) {
     return (
         <div className="flex justify-between items-center">
             <h2 className="text-2xl">Listado de Facturas</h2>
+           
+            
 
             <Dialog open={openModalCreate} onOpenChange={setOpenModalCreate}>
                 <DialogTrigger asChild>

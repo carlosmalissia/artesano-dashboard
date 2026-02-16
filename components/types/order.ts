@@ -1,14 +1,15 @@
 export type Order = {
 
     _id: string
+    numeroFactura: string
     productos: Object[]
-    vendedorId: {
+    vendedor: {
         _id: string;
         nombre: string;
         email: string;
         avatar?: string;
     };
-    compradorId:{
+    comprador:{
         _id: string
         rol: "admin" | "vendedor" | "usuario"
         nombre: string
@@ -17,6 +18,6 @@ export type Order = {
     fechaCreacion: string
     fechaActualizacion: string
     precioTotal:number
-    numeroFactura:number
+    
 
 }
