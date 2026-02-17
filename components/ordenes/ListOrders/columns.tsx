@@ -94,7 +94,7 @@ export const getColumns = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <Link href={`/dashboard/vendedor/ordenes/${order._id}`}>
+            <Link href={`/dashboard/vendedor/Order/${order._id}`}>
               <DropdownMenuItem>
                 <Pencil className="w-4 h-4 mr-2" />
                 Editar

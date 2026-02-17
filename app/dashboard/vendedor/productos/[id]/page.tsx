@@ -5,8 +5,6 @@ import { useGetProductoByIdQuery, useUpdateProductoMutation } from "@/redux/serv
 import { toast } from "sonner"
 import { ProductForm, FormData } from "@/components/productos/ProductForm"
 
-console.log("estoy en el pag correcto");
-
 
 export default function EditProductPage() {
     const { id } = useParams()
@@ -14,9 +12,6 @@ export default function EditProductPage() {
     const { data, isLoading } = useGetProductoByIdQuery(id as string)
     const [updateProducto] = useUpdateProductoMutation()
     
-    console.log("id", id);
-    
-    console.log("data: ", data);
     
     const handleSubmit = async (values: FormData, imageUrl: string) => {
         try {

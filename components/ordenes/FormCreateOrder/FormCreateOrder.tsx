@@ -17,7 +17,7 @@ export function FormCreateOrder({ userId, onSuccess, refetchOrder }: Props) {
         try {
             await createOrder({
                 ...values,
-                precioTotal: parseFloat(values.precioTotal),
+                precioTotal: values.precioTotal,
                 numeroFactura: parseInt(values.numeroFactura),
                 vendedorId: userId,
                 image: imageUrl,

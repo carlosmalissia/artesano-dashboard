@@ -27,14 +27,12 @@ import { useGetCategoriasQuery } from "@/redux/services/categoriasApi"
 const formSchema = z.object({
     numeroFactura: z.string().min(1),
     productos: z.array(z.object({
-    nombre: z.string().min(1, "Nombre requerido"),
-    cantidad: z.number().min(1),
-    precio: z.number().min(1)
+        productoId: z.string().min(1),
+        cantidad: z.number().min(1)
   })).min(1, "Debe añadir al menos un producto"),
-    precioTotal: z.string().min(1),
+    precioTotal: z.number().min(1),
     compradorId: z.string().min(1),
-    image: z.string().optional(),
-    vendedorId: z.string().min(1, "Categoría requerida"),
+    estado: z.enum(["pendiente", "pagada"])
 })
 
 export type FormData = z.infer<typeof formSchema>
@@ -52,11 +50,10 @@ export function OrderForm({ modo, initialValues, onSubmit, defaultImage, loading
         resolver: zodResolver(formSchema),
         defaultValues: initialValues || {
             numeroFactura: "",
-            productos:[{nombre:"", cantidad:0, precio:0}],
-            precioTotal: "",
+            productos:[{productoId:"", cantidad:0}],
+            precioTotal:0,
             compradorId: "",
-            image: "",
-            vendedorId: "",
+            estado: "pendiente"
         },
     })
 
@@ -68,16 +65,19 @@ export function OrderForm({ modo, initialValues, onSubmit, defaultImage, loading
     useEffect(() => {
         if (initialValues) {
             form.reset(initialValues)
-            setImageUrl(initialValues.image || "")
+            
         }
     }, [initialValues])
 
+    const estadoActual = form.watch("estado")
+    const isPagada = estadoActual === "pagada"
+    
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
 
         const formData = new FormData()
-        formData.append("image", file)
+        /* formData.append("image", file)
 
         try {
             setUploading(true)
@@ -94,7 +94,7 @@ export function OrderForm({ modo, initialValues, onSubmit, defaultImage, loading
             toast.error("Error al subir imagen")
         } finally {
             setUploading(false)
-        }
+        } */
     }
 
     const handleSubmit = (values: FormData) => {
@@ -110,20 +110,19 @@ export function OrderForm({ modo, initialValues, onSubmit, defaultImage, loading
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Nº Factura</FormLabel>
-                            <FormControl><Input type="string" {...field} /></FormControl>
+                            <FormControl><Input {...field} disabled={isPagada} /></FormControl>
                             <FormMessage />
                         </FormItem>
                     )} />
 
-                
 
                 <FormField
                     control={form.control}
                     name="precioTotal"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Precio</FormLabel>
-                            <FormControl><Input type="number" {...field} /></FormControl>
+                            <FormLabel>Precio Total (en $A)</FormLabel>
+                            <FormControl><Input {...field} disabled={isPagada} /></FormControl>
                             <FormMessage />
                         </FormItem>
                     )} />
@@ -134,44 +133,44 @@ export function OrderForm({ modo, initialValues, onSubmit, defaultImage, loading
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Comprador</FormLabel>
-                            <FormControl><Input type="string" {...field} /></FormControl>
+                            <FormControl><Input {...field} disabled={isPagada} /></FormControl>
                             <FormMessage />
                         </FormItem>
                     )} />
-                <FormField
-                    control={form.control}
-                    name="vendedorId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Vendedor</FormLabel>
-                            <FormControl><Input type="string" {...field} /></FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
+                <div className="mt-6">
+                    <h3 className="text-lg font-semibold mb-2">Productos</h3>
+
+  <div className="space-y-2">
+    {form.watch("productos")?.map((item, index) => (
+      <div
+        key={index}
+        className="flex justify-between bg-slate-800 p-3 rounded-md"
+      >
+        <div>
+          <p className="font-medium">Producto ID: {item.productoId}</p>
+          <p className="text-sm text-gray-400">
+            Cantidad: {item.cantidad}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
                 
-
-                <FormField
-                    control={form.control}
-                    name="image"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Imagen</FormLabel>
-                            <FormControl>
-                                <Input type="file" onChange={handleImageChange} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-
-                <Button type="submit" disabled={uploading || loading}>
-                    {modo === "edit"
-                        ? uploading
-                            ? "Actualizando imagen..."
-                            : "Actualizar"
-                        : uploading
-                            ? "Subiendo imagen..."
-                            : "Crear Producto"}
-                </Button>
+                <Button
+  type="submit"
+  disabled={uploading || loading || isPagada}
+>
+  {isPagada
+    ? "Factura Pagada"
+    : modo === "edit"
+      ? uploading
+        ? "Actualizando imagen..."
+        : "Actualizar"
+      : uploading
+        ? "Subiendo imagen..."
+        : "Crear Factura"}
+</Button>
             </form>
         </Form>
     )
