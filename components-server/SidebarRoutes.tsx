@@ -1,9 +1,15 @@
-import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
+import { getUserFromToken } from "@/lib-server/auth/auth";
 import { SidebarRoutesClient } from "@/components/SidebarRoutesClient";
+import type { Role } from "@/components/types/role";
 
 export default async function SidebarRoutes() {
-    const user = await getUserFromCookie();
-    const rol = user?.rol ?? "usuario"; // fallback si no hay usuario
+  const user = await getUserFromToken();
 
-    return <SidebarRoutesClient rol={rol} />;
+  let rol: Role = "vendedor"; // default seguro
+
+  if (user?.roles?.includes("admin")) {
+    rol = "admin";
+  }
+
+  return <SidebarRoutesClient rol={rol} />;
 }

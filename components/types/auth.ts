@@ -1,6 +1,6 @@
 export type UserPayload = {
   id: string
   email: string
-  rol: "admin" | "vendedor"
+  roles: ('admin' | 'vendedor' | 'comprador')[];
   nombre?: string
 }
