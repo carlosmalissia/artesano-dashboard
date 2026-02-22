@@ -1,6 +1,9 @@
+import { Role } from "./role"
+
+
 export type User = {
     _id: string
-    rol: "admin" | "vendedor" | "usuario"
+    roles: Role[]
     nombre: string
     avatar?: string
     fechaCreacion: string;

@@ -8,8 +8,8 @@ export default async function Companies() {
 console.log("userid:", user.id);
 
   return (
-    <VendedorOnly user={user}>
+    
       <OrderSeller userId={user.id} />
-    </VendedorOnly>
+    
   );
 }

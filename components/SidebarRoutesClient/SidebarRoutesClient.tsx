@@ -14,7 +14,7 @@ import {
 } from './SidebarRoutes.data';
 
 type Props = {
-  rol: 'admin' | 'vendedor' | 'usuario';
+  rol: ('admin' | 'vendedor');
 };
 
 export function SidebarRoutesClient({ rol }: Props) {

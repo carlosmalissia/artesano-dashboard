@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function VendedorOnly({ user, children }: Props) {
-    if (!user || user.rol !== 'vendedor') {
+    if (!user || !user.roles.includes('vendedor')) {
         return <p>No autorizado</p>;
     }
 

@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function AdminOnly({ user, children }: Props) {
-  if (user.rol !== "admin") {
+  if (!user.roles.includes("admin")) {
     return <p>No autorizado</p>;
   }
 
