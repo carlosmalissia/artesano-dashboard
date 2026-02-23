@@ -22,7 +22,7 @@ type GetColumnsProps = {
 }
 
 export const getColumns = ({
-  isAdmin = false,
+  isAdmin,
   refetchOrder,
 }: GetColumnsProps): ColumnDef<Order>[] => {
 
@@ -85,6 +85,8 @@ export const getColumns = ({
     header: "Actions",
     cell: ({ row }) => {
       const order = row.original
+
+  
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -94,12 +96,19 @@ export const getColumns = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <Link href={`/dashboard/vendedor/Order/${order._id}`}>
-              <DropdownMenuItem>
-                <Pencil className="w-4 h-4 mr-2" />
-                Editar
-              </DropdownMenuItem>
-            </Link>
+            { isAdmin ? 
+              (<Link href={`/dashboard/admin/Order/${order._id}`}>
+                  <DropdownMenuItem>
+                    <Pencil className="w-4 h-4 mr-2" />
+                    Editar
+                  </DropdownMenuItem>
+              </Link>) : 
+              (<Link href={`/dashboard/vendedor/Order/${order._id}`}>
+                <DropdownMenuItem>
+                  <Pencil className="w-4 h-4 mr-2" />
+                  Editar
+                </DropdownMenuItem>
+              </Link>)}
             <DropdownMenuItem asChild>
               {/* <DeleteProductDialog
                 productId={producto._id}

@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { useParams, useRouter } from "next/navigation"
+import { Order} from "@/components/types/order";
 import {
     SortingState,
     flexRender,
@@ -23,15 +25,28 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+export interface Orden {
+  _id: string
+  numeroFactura: string
+  estado: "pendiente" | "pagada"
+  precioTotal: number
+  fechaCreacion: string
+  comprador: {
+    nombre: string
+    email: string
+  }
+}
+
 interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[],
-    data: TData[]
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data
 }: DataTableProps<TData, TValue>) {
+    const router = useRouter()
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -87,7 +102,15 @@ export function DataTable<TData, TValue>({
                     <TableBody>
                         {table.getCoreRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow key={row.id} data-table={row.getIsSelected() && "selected"}>
+                                <TableRow
+                                    key={row.id}
+                                    data-state={row.getIsSelected() && "selected"}
+                                    className="cursor-pointer hover:bg-muted/50 transition-colors"
+                                    onClick={() =>{
+                                        const orden = row.original as Orden
+                                        router.push(`/dashboard/admin/Order/${orden._id}`)
+                                    }}
+                                >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}

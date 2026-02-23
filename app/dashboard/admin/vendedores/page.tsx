@@ -7,12 +7,12 @@ export default async function Page() {
   if (!user) return <p>Usuario no autenticado</p>;
   const customer = false
   return (
-    <AdminOnly user={user}>
+    
       <Vendedores
         userId={user.id}
-        isAdmin={user.rol === "admin"}
+        isAdmin={user.roles.includes("admin")}
         customer = {customer}
       />
-    </AdminOnly>
+    
   );
 }

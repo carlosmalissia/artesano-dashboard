@@ -49,8 +49,7 @@ export function HeaderSellers({ userId, refetchVendedores, customer }: Props) {
                         transition={{ duration: 0.25 }}
                     >
                         <DialogHeader>
-                            {customer ? (<DialogTitle>Nuevo Cliente</DialogTitle>)
-                            : (<DialogTitle>Nuevo Vendedor</DialogTitle>)}
+                            <DialogTitle>{customer ? "Nuevo Cliente" : "Nuevo Vendedor"}</DialogTitle>
                             <DialogDescription>
                                 Crear y configurar nuevo
                             </DialogDescription>
