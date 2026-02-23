@@ -5,10 +5,9 @@ import { useGetUsuarioByIdQuery, useUpdateUsuarioMutation } from "@/redux/servic
 import { toast } from "sonner"
 import { UserForm, FormData } from "@/components/vendedores/UserForm"
 
-console.log("estoy en el pag correcto");
 
 
-export default function EditProductPage() {
+export default function EditSellerPage() {
     const { id } = useParams()
     const router = useRouter()
     const { data, isLoading } = useGetUsuarioByIdQuery(id as string)

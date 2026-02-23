@@ -7,11 +7,11 @@ export default async function Page() {
   if (!user) return <p>Usuario no autenticado</p>;
 
   return (
-    <AdminOnly user={user}>
+    
       <OrderAdmin
         userId={user.id}
-        isAdmin={user.rol === "admin"}
+        isAdmin={user.roles.includes("admin")}
       />
-    </AdminOnly>
+    
   );
 }

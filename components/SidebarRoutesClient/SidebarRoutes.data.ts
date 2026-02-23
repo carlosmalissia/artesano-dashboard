@@ -38,7 +38,7 @@ export const dataGeneralSidebarAdmin = [
     {
         icon: WalletCards,
         label: "Facturas",
-        href: "/dashboard/admin/facturas",
+        href: "/dashboard/admin/Order",
     },
 ];
 

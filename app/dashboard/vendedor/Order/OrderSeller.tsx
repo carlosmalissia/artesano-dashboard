@@ -17,8 +17,7 @@ export function OrderSeller({userId}:Props) {
       const ordenesVendedor = ordenes.filter(
         (ordenes: Order) => ordenes.vendedor?._id === userId
       );
-console.log("UserId: ", userId);
-console.log("ORDEN VENDEDOR", ordenes);
+
     return (
         <>
         

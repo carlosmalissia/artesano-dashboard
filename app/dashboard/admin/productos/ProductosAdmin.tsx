@@ -29,7 +29,7 @@ export function ProductosAdmin({ userId, isAdmin }: Props) {
 
   
   const vendedores = usuarios?.filter(
-  (u: User) => u.rol === "vendedor"
+  (u: User) => u.roles.includes("vendedor")
 ) ?? [];
 
   

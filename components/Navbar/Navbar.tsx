@@ -1,6 +1,6 @@
 import { Menu, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { ToggleTheme } from "@/components/ToggleTheme"
 import LogoutButton from "@/components/logout-button/logout-button"
 import SidebarRoutes from "@/components-server/SidebarRoutes";
@@ -22,6 +22,10 @@ export function Navbar({ user }: { user: User }) {
                         <Menu />
                     </SheetTrigger>
                     <SheetContent side="left">
+                        
+                        <SheetHeader>
+                            <SheetTitle>Menú de navegación</SheetTitle>
+                        </SheetHeader>
                         <SidebarRoutes />
                     </SheetContent>
                 </Sheet>

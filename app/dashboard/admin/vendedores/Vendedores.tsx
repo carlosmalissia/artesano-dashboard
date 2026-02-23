@@ -21,7 +21,7 @@ export function Vendedores({ userId, isAdmin, customer }: Props) {
     : data?.usuarios ?? [];
 
     const UsuariosFiltrados = usuarios.filter(
-        (u:User) => (u.rol === "vendedor")
+        (u:User) => (u.roles.includes("vendedor"))
     ) 
     
     return (

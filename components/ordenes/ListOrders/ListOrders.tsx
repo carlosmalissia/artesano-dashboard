@@ -17,7 +17,7 @@ export function ListOrders({
   ordenes,
   isLoading,
   refetchOrder,
-  isAdmin = false,
+  isAdmin,
 }: Props) {
   return (
     <>

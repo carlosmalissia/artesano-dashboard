@@ -31,7 +31,7 @@ export default function EditOrderPage() {
             }).unwrap()
 
             toast.success("Factura actualizado")
-            router.push("/dashboard/vendedor/Order")
+            router.push("/dashboard/admin/Order")
         } catch (err) {
             console.error(err)
             toast.error("Error al actualizar factura")
