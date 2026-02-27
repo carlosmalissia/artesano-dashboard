@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { User } from "@/components/types/user";
 
 export const usuarioApi = createApi({
   reducerPath: 'usuarioApi',
@@ -15,6 +16,13 @@ export const usuarioApi = createApi({
         body: credenciales,
       }),
     }),
+    getClientes: builder.query<User[], void>({
+  query: () => ({
+    url: "/api/clientes",
+    method: "GET",
+  }),
+  providesTags: ["Usuario"],
+}),
     getUsuarios: builder.query({
       query: () => '/api/usuarios',
       providesTags: ['Usuario'],
@@ -55,5 +63,6 @@ export const {
    useCreateUsuarioMutation,
    useGetUsuarioByIdQuery,
    useDeleteUsuarioMutation,
-   useUpdateUsuarioMutation
+   useUpdateUsuarioMutation,
+   useGetClientesQuery
   } = usuarioApi;

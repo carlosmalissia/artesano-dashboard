@@ -1,46 +1,35 @@
 "use client"
 
-//import { ProductSkeleton } from "../ProductSkeleton"
 import { motion } from "framer-motion"
-import { getColumns } from "./columns"
 import { DataTable } from "./data-table"
-import { User } from "@/components/types/user"
+import { User } from "@/components/types/user";
+import { getCustomerColumns } from "./columns"
+import { ColumnDef } from "@tanstack/react-table";
 
-type Props = {
-  usuarios: User[]
+type Props<TData> = {
+  data: TData[]
+  columns: ColumnDef<TData>[]
   isLoading: boolean
-  refetchUsuarios: () => void
-  isAdmin?: boolean
 }
 
-export function ListUsers({
-  usuarios,
+export function ListUsers<TData>({
+  data,
+  columns,
   isLoading,
-  refetchUsuarios,
-  isAdmin = false,
-}: Props) {
+}: Props<TData>) {
   return (
     <>
       {isLoading ? (
-        <>
-          <h2 className="text-lg text-muted-foreground mb-4">
-            Cargando usuarios...
-          </h2>
-          {/* <ProductSkeleton /> */}
-        </>
+        <h2 className="text-lg text-muted-foreground mb-4">
+          Cargando datos...
+        </h2>
       ) : (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <DataTable
-            columns={getColumns({
-              isAdmin,
-              refetchUsuarios,
-            })}
-            data={usuarios}
-          />
+          <DataTable columns={columns} data={data} />
         </motion.div>
       )}
     </>
