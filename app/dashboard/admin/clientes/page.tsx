@@ -1,4 +1,4 @@
-import AdminOnly from "@/components/auth/AdminOnly";
+
 import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
 import { CustomersAdmin } from "./CustomersAdmin";
 
@@ -7,12 +7,12 @@ export default async function Page() {
   if (!user) return <p>Usuario no autenticado</p>;
     const customer = true
   return (
-    <AdminOnly user={user}>
+    
       <CustomersAdmin
         userId={user.id}
-        isAdmin={user.rol === "admin"}
+        isAdmin={user.roles.includes("admin")}
         customer = {customer}
       />
-    </AdminOnly>
+    
   );
 }

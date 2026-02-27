@@ -2,7 +2,7 @@
 
 import { HeaderSellers } from "@/components/vendedores/HeaderSellers";
 import { ListUsers } from "@/components/vendedores/ListUsers";
-import { useGetUsuariosQuery } from "@/redux/services/usuarioApi";
+import { useGetClientesQuery } from "@/redux/services/usuarioApi";
 import { User } from "@/components/types/user";
 
 type Props = {
@@ -14,21 +14,18 @@ type Props = {
 
 export function CustomersAdmin({ userId, isAdmin, customer }: Props) {
     
-    const { data, isLoading, refetch } = useGetUsuariosQuery(null);
+    const { data: clientes, isLoading, refetch } = useGetClientesQuery();
 
-    const usuarios = Array.isArray(data)
-    ? data
-    : data?.usuarios ?? [];
+    const usuarios = Array.isArray(clientes)
+    ? clientes
+    : clientes ?? [];
 
-    const UsuariosFiltrados = usuarios.filter(
-        (u:User) => (u.rol === "usuario")
-    ) 
     
     return (
         <>
         <HeaderSellers userId={userId} refetchVendedores={refetch} customer={customer} />
         <ListUsers
-                usuarios={UsuariosFiltrados}
+                usuarios = {usuarios}
                 isLoading={isLoading}
                 refetchUsuarios={refetch}
                 isAdmin={isAdmin}

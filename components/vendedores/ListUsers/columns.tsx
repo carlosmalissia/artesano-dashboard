@@ -20,7 +20,7 @@ type GetColumnsProps = {
   refetchUsuarios?: () => void
 }
 
-export const getColumns = ({
+export const getCustomerColumns = ({
   isAdmin = false,
   refetchUsuarios,
 }: GetColumnsProps): ColumnDef<User>[] => {
@@ -95,14 +95,14 @@ export const getColumns = ({
                 Editar
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem asChild>
+            {/* <DropdownMenuItem asChild>
               <DeleteUserDialog
                 productId={usuario._id}
                 productName={usuario.nombre}
                 refetchProductos={refetchUsuarios
                 }
               />
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       )

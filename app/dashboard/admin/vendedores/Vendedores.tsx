@@ -1,38 +1,18 @@
-"use client";
+'use client';
 
-import { HeaderSellers } from "@/components/vendedores/HeaderSellers";
-import { ListUsers } from "@/components/vendedores/ListUsers";
-import { useGetUsuariosQuery } from "@/redux/services/usuarioApi";
-import { User } from "@/components/types/user";
+import { useGetVendorsWithMetricsQuery } from '@/redux/services/adminApi';
+import { DataTable } from '@/components/vendedores/ListUsers/data-table';
+import { getVendedoresColumns } from '@/components/vendedores/columnsVendedores';
 
-type Props = {
- 
-  userId: string;
-  isAdmin: boolean;
-  customer: boolean
-};
+export function Vendedores() {
+  const { data, isLoading, isError } = useGetVendorsWithMetricsQuery();
 
-export function Vendedores({ userId, isAdmin, customer }: Props) {
-    
-    const { data, isLoading, refetch } = useGetUsuariosQuery(null);
+  if (isLoading) return <p>Cargando...</p>;
+  if (isError) return <p>Error cargando vendedores</p>;
 
-    const usuarios = Array.isArray(data)
-    ? data
-    : data?.usuarios ?? [];
-
-    const UsuariosFiltrados = usuarios.filter(
-        (u:User) => (u.roles.includes("vendedor"))
-    ) 
-    
-    return (
-        <>
-        <HeaderSellers userId={userId} refetchVendedores={refetch} customer={customer} />
-        <ListUsers
-                usuarios={UsuariosFiltrados}
-                isLoading={isLoading}
-                refetchUsuarios={refetch}
-                isAdmin={isAdmin}
-              />
-        </>
-    )
+  return (
+    <div className="p-6">
+      <DataTable columns={getVendedoresColumns()} data={data ?? []} />
+    </div>
+  );
 }
