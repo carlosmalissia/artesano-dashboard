@@ -12,7 +12,11 @@ export function Vendedores() {
 
   return (
     <div className="p-6">
-      <DataTable columns={getVendedoresColumns()} data={data ?? []} />
+      <DataTable
+        columns={getVendedoresColumns()}
+        data={data ?? []}
+        initialSorting={[{ id: 'totalVendido', desc: true }]}
+      />
     </div>
   );
 }

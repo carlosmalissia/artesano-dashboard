@@ -1,3 +1,3 @@
-export const ROLES = ["admin", "vendedor", "comprador"] as const
+export const ROLES = ['OWNER', 'ADMIN', 'VENDEDOR', 'CLIENTE'] as const;
 
-export type Role = (typeof ROLES)[number]
+export type Role = (typeof ROLES)[number];
