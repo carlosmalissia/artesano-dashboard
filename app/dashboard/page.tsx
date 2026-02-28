@@ -1,26 +1,25 @@
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
-import { redirect } from "next/navigation";
-import { getUserFromToken } from "@/lib-server/auth/auth";
+import { redirect } from 'next/navigation';
+import { getUserFromToken } from '@/lib-server/auth/auth';
 
-import { hasRole } from "@/lib/auth/roles";
-
+import { hasRole } from '@/lib/auth/roles';
 
 export default async function DashboardRedirect() {
   const user = await getUserFromToken();
 
   if (!user) {
-    redirect("/login");
+    redirect('/login');
   }
 
-  if (hasRole(user, "admin")) {
-    redirect("/dashboard/admin");
+  if (hasRole(user, 'OWNER')) {
+    redirect('/dashboard/admin');
   }
 
-  if (hasRole(user, "vendedor")) {
-    redirect("/dashboard/vendedor");
+  if (hasRole(user, 'VENDEDOR')) {
+    redirect('/dashboard/vendedor');
   }
 
   // fallback seguro
-  redirect("/login");
+  redirect('/login');
 }

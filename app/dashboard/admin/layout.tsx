@@ -1,11 +1,7 @@
-import { requireRole } from "@/lib-server/auth/guards"
+import { requireRole } from '@/lib-server/auth/guards';
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  await requireRole("admin")
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  await requireRole('OWNER');
 
-  return <>{children}</>
+  return <>{children}</>;
 }

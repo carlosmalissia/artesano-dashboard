@@ -32,11 +32,17 @@ export const getVendedoresColumns = (): ColumnDef<VendorWithMetrics>[] => [
   {
     accessorKey: 'comisionPlataforma',
     header: 'Comisión (10%)',
-    cell: ({ row }) => formatCurrency(row.original.comisionPlataforma),
+    cell: ({ row }) => (
+      <span className="text-blue-400">{formatCurrency(row.original.comisionPlataforma)}</span>
+    ),
   },
   {
     accessorKey: 'gananciaVendedor',
     header: 'Ganancia Vendedor',
-    cell: ({ row }) => formatCurrency(row.original.gananciaVendedor),
+    cell: ({ row }) => (
+      <span className="text-emerald-400 font-semibold">
+        {formatCurrency(row.original.gananciaVendedor)}
+      </span>
+    ),
   },
 ];

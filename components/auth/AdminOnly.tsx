@@ -1,6 +1,6 @@
-"use client";
-import { ReactNode } from "react";
-import { UserPayload } from "@/types/auth";
+'use client';
+import { ReactNode } from 'react';
+import { UserPayload } from '@/types/auth';
 
 type Props = {
   user: UserPayload;
@@ -8,12 +8,9 @@ type Props = {
 };
 
 export default function AdminOnly({ user, children }: Props) {
-  if (!user.roles.includes("admin")) {
+  if (!user.roles.includes('OWNER')) {
     return <p>No autorizado</p>;
   }
 
   return <>{children}</>;
 }
-
-
-
