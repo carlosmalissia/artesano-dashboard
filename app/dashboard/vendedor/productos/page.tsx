@@ -1,7 +1,6 @@
-
-import VendedorOnly from "@/components/auth/VendedorOnly";
-import { getUserFromCookie } from "@/lib-server/auth/getUserFromCookie";
-import { ProductosClient } from "./ProductosClient";
+import VendedorOnly from '@/components/features/auth/VendedorOnly';
+import { getUserFromCookie } from '@/lib-server/auth/getUserFromCookie';
+import { ProductosClient } from './ProductosClient';
 
 export default async function Companies() {
   const user = await getUserFromCookie();

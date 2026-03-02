@@ -1,4 +1,3 @@
-import AdminOnly from '@/components/auth/AdminOnly';
 import { getUserFromCookie } from '@/lib-server/auth/getUserFromCookie';
 import { OrderAdmin } from './OrderAdmin';
 

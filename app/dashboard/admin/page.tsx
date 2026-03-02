@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
-import { ExecutiveCards } from '@/components/executive/ExecutiveCards';
-import { SalesChart } from '@/components/executive/SalesChart';
-import { SalesByVendorChart } from '@/components/executive/SalesByVendorChart';
-import { TopVendorCard } from '@/components/executive/TopVendorCard';
+import { ExecutiveCards } from '@/components/features/executive/ExecutiveCards';
+import { SalesChart } from '@/components/features/executive/SalesChart';
+import { SalesByVendorChart } from '@/components/features/executive/SalesByVendorChart';
+import { TopVendorCard } from '@/components/features/executive/TopVendorCard';
 
 export default async function Page() {
   const cookieStore = await cookies();

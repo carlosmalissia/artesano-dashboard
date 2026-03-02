@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
-import { Role } from '@/components/types/role';
+import { Role } from '@/types/role';
 
 export interface AuthUser {
   id: string;

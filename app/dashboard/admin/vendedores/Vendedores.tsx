@@ -1,8 +1,8 @@
 'use client';
 
 import { useGetVendorsWithMetricsQuery } from '@/redux/services/adminApi';
-import { DataTable } from '@/components/vendedores/ListUsers/data-table';
-import { getVendedoresColumns } from '@/components/vendedores/columnsVendedores';
+import { DataTable } from '@/components/features/vendedores/ListUsers/data-table';
+import { getVendedoresColumns } from '@/components/features/vendedores/columnsVendedores';
 
 export function Vendedores() {
   const { data, isLoading, isError } = useGetVendorsWithMetricsQuery();

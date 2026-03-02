@@ -1,7 +1,15 @@
+import { Role } from './role';
+
 export type UserPayload = {
   id: string;
-  nombre: string;
   email: string;
-  roles: ('OWNER' | 'ADMIN' | 'VENDEDOR' | 'CLIENTE')[];
+  roles: Role[];
+  nombre?: string;
+};
+
+export type AuthUser = {
+  id: string;
+  roles: Role[];
+  nombre?: string;
   avatar?: string;
 };

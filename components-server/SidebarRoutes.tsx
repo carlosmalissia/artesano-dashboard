@@ -1,6 +1,6 @@
 import { getUserFromToken } from '@/lib-server/auth/auth';
-import { SidebarRoutesClient } from '@/components/SidebarRoutesClient';
-import type { Role } from '@/components/types/role';
+import { SidebarRoutesClient } from '@/components/layout/SidebarRoutesClient';
+import type { Role } from '@/types/role';
 
 export default async function SidebarRoutes() {
   const user = await getUserFromToken();

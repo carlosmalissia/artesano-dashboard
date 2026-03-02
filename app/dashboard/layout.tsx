@@ -1,7 +1,7 @@
-import { Sidebar } from '@/components/Sidebar';
-import { Navbar } from '@/components/Navbar';
+import { Sidebar } from '@/components/layout/Sidebar';
+import { Navbar } from '@/components/layout/Navbar';
 import { requireAuth } from '@/lib-server/auth/guards';
-import type { AuthUser } from '@/components/types/auth';
+import type { AuthUser } from '@/types/auth';
 
 export default async function LayoutDashboard({ children }: { children: React.ReactNode }) {
   const user: AuthUser = await requireAuth();

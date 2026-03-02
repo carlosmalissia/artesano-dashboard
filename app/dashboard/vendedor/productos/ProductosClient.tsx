@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { HeaderProduct } from "@/components/productos/HeaderProduct";
-import { ListProducts } from "@/components/productos/ListProducts";
-import { useGetProductosQuery } from "@/redux/services/productosApi";
-import { Product } from "@/components/types/product";
+import { HeaderProduct } from '@/components/features/productos/HeaderProduct';
+import { ListProducts } from '@/components/features/productos/ListProducts';
+import { useGetProductosQuery } from '@/redux/services/productosApi';
+import { Product } from '@/types/product';
 
 type Props = {
   userId: string;
@@ -12,9 +12,7 @@ type Props = {
 export function ProductosClient({ userId }: Props) {
   const { data, isLoading, refetch } = useGetProductosQuery(null);
 
-  const productos = Array.isArray(data)
-    ? data
-    : data?.productos ?? [];
+  const productos = Array.isArray(data) ? data : (data?.productos ?? []);
 
   const productosVendedor = productos.filter(
     (producto: Product) => producto.vendedorId?._id === userId
@@ -22,10 +20,7 @@ export function ProductosClient({ userId }: Props) {
 
   return (
     <div>
-      <HeaderProduct
-        userId={userId}
-        refetchProductos={refetch}
-      />
+      <HeaderProduct userId={userId} refetchProductos={refetch} />
 
       <ListProducts
         productos={productosVendedor}
