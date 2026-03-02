@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User } from "@/components/types/user";
+import { User } from '@/types/user';
 
 export const usuarioApi = createApi({
   reducerPath: 'usuarioApi',
@@ -17,52 +17,52 @@ export const usuarioApi = createApi({
       }),
     }),
     getClientes: builder.query<User[], void>({
-  query: () => ({
-    url: "/api/clientes",
-    method: "GET",
-  }),
-  providesTags: ["Usuario"],
-}),
+      query: () => ({
+        url: '/api/clientes',
+        method: 'GET',
+      }),
+      providesTags: ['Usuario'],
+    }),
     getUsuarios: builder.query({
       query: () => '/api/usuarios',
       providesTags: ['Usuario'],
     }),
     getUsuarioById: builder.query({
-            query: (id: string) => `/api/usuarios/${id}`,
-            providesTags: ['Usuario'],
-        }),
-        createUsuario: builder.mutation({
-            query: (nuevoUsuario) => ({
-                url: '/api/usuarios',
-                method: 'POST',
-                body: nuevoUsuario,
-            }),
-            invalidatesTags: ['Usuario'],
-        }),
-        updateUsuario: builder.mutation({
-            query: ({ id, ...data }) => ({
-                url: `/api/usuarios/${id}`,
-                method: 'PUT',
-                body: data,
-            }),
-            invalidatesTags: ['Usuario'],
-        }),
-        deleteUsuario: builder.mutation({
-            query: (id: string) => ({
-                url: `/api/usuarios/${id}`,
-                method: 'DELETE',
-            }),
-            invalidatesTags: ['Usuario'],
-        }),
+      query: (id: string) => `/api/usuarios/${id}`,
+      providesTags: ['Usuario'],
+    }),
+    createUsuario: builder.mutation({
+      query: (nuevoUsuario) => ({
+        url: '/api/usuarios',
+        method: 'POST',
+        body: nuevoUsuario,
+      }),
+      invalidatesTags: ['Usuario'],
+    }),
+    updateUsuario: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/api/usuarios/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Usuario'],
+    }),
+    deleteUsuario: builder.mutation({
+      query: (id: string) => ({
+        url: `/api/usuarios/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Usuario'],
+    }),
   }),
 });
 
-export const { 
+export const {
   useLoginMutation,
-   useGetUsuariosQuery, 
-   useCreateUsuarioMutation,
-   useGetUsuarioByIdQuery,
-   useDeleteUsuarioMutation,
-   useUpdateUsuarioMutation,
-   useGetClientesQuery
-  } = usuarioApi;
+  useGetUsuariosQuery,
+  useCreateUsuarioMutation,
+  useGetUsuarioByIdQuery,
+  useDeleteUsuarioMutation,
+  useUpdateUsuarioMutation,
+  useGetClientesQuery,
+} = usuarioApi;

@@ -1,10 +1,10 @@
 'use client';
 
-import { HeaderProduct } from '@/components/productos/HeaderProduct';
-import { ListProducts } from '@/components/productos/ListProducts';
+import { HeaderProduct } from '@/components/features/productos/HeaderProduct';
+import { ListProducts } from '@/components/features/productos/ListProducts';
 import { useGetProductosQuery } from '@/redux/services/productosApi';
 import { useGetUsuariosQuery } from '@/redux/services/usuarioApi';
-import { Product } from '@/components/types/product';
+import { Product } from '@/types/product';
 import { useState } from 'react';
 import {
   Select,
@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { User } from '@/components/types/user';
+import { User } from '@/types/user';
 import { useEffect } from 'react';
 
 type Props = {

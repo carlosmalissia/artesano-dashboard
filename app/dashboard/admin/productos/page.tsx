@@ -1,4 +1,4 @@
-import AdminOnly from '@/components/auth/AdminOnly';
+import AdminOnly from '@/components/features/auth/AdminOnly';
 import { getUserFromCookie } from '@/lib-server/auth/getUserFromCookie';
 import { ProductosAdmin } from './ProductosAdmin';
 

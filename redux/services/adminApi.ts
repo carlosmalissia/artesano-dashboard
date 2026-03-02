@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { VendorWithMetrics } from '@/components/types/VendorWithMetrics';
+import { VendorWithMetrics } from '@/types/VendorWithMetrics';
 
 export const adminApi = createApi({
   reducerPath: 'adminApi',
