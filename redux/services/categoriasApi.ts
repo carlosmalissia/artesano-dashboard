@@ -33,6 +33,13 @@ export const categoriasApi = createApi({
       providesTags: ['Categorias'],
     }),
 
+    getImpactoCategoria: builder.query<
+      { productosActivos: number; vendedoresAfectados: number },
+      string
+    >({
+      query: (id) => `/api/categorias/${id}/impact`,
+    }),
+
     toggleCategoria: builder.mutation<Categoria, string>({
       query: (id) => ({
         url: `/api/categorias/${id}/toggle`,
@@ -47,6 +54,7 @@ export const {
   useGetCategoriasPublicQuery,
   useGetCategoriasAdminQuery,
   useToggleCategoriaMutation,
+  useLazyGetImpactoCategoriaQuery,
 } = categoriasApi;
 
 // Tipado completo

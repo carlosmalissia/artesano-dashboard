@@ -2,7 +2,7 @@
 
 import { ProductSkeleton } from '@/components/features/productos/ProductSkeleton';
 import { motion } from 'framer-motion';
-import { getColumns } from './columns';
+import { getColumns } from '../../../../app/dashboard/admin/productos/columns';
 import { DataTable } from './data-table';
 import { Product } from '@/types/product';
 
