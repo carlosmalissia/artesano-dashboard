@@ -1,7 +1,5 @@
 'use client';
 
-import { ArrowUpDown, MoreHorizontal, Pencil } from 'lucide-react';
-import { formatDate } from '@/util';
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,15 +8,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
-import Image from 'next/image';
 
 import { Categoria } from '@/types/categoria';
 import { StatusBadge } from '@/components/ui/StatusBadge';
-import { useToggleCategoriaMutation } from '@/redux/services/categoriasApi';
-import { toast } from 'sonner';
 
-export const columns: ColumnDef<Categoria>[] = [
+export const getColumns = (
+  handleToggle: (id: string, activa: boolean) => void
+): ColumnDef<Categoria>[] => [
   {
     accessorKey: 'nombre',
     header: 'Nombre',
@@ -37,15 +33,6 @@ export const columns: ColumnDef<Categoria>[] = [
     header: 'Control de estado',
     cell: ({ row }) => {
       const { _id, activa } = row.original;
-      const [toggleCategoria] = useToggleCategoriaMutation();
-      const handleToggle = async (id: string) => {
-        try {
-          await toggleCategoria(id).unwrap();
-          toast.success('Estado actualizado');
-        } catch {
-          toast.error('Error al actualizar');
-        }
-      };
 
       return (
         <DropdownMenu>
@@ -55,7 +42,7 @@ export const columns: ColumnDef<Categoria>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => toggleCategoria(_id)}>
+            <DropdownMenuItem onClick={() => handleToggle(_id, activa)}>
               {activa ? 'Desactivar' : 'Activar'}
             </DropdownMenuItem>
           </DropdownMenuContent>
